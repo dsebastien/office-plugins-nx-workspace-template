@@ -6,7 +6,7 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="WordPlugin"/>
   <Description DefaultValue="A template to get started."/>
-  <IconUrl DefaultValue="https://localhost:4200/assets/images/icon-32.png"/>
+  <IconUrl DefaultValue="http://localhost:4200/assets/images/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://localhost:4200/assets/images/icon-80.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
@@ -18,7 +18,7 @@
   <DefaultSettings>
     <SourceLocation DefaultValue="http://localhost:4200/index.html"/>
     <!-- Alternative
-    <SourceLocation DefaultValue="https://localhost:4200/app.component.html"/>
+    <SourceLocation DefaultValue="http://localhost:4200/app.component.html"/>
     -->
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
