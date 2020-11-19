@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "projects": {
+    "word": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/word",
+      "sourceRoot": "apps/word/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/word",
+            "index": "apps/word/src/index.html",
+            "main": "apps/word/src/main.ts",
+            "polyfills": "apps/word/src/polyfills.ts",
+            "tsConfig": "apps/word/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/word/src/favicon.ico",
+              "apps/word/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@microsoft/office-js/dist/",
+                "output": "./assets/office-js"
+              }
+            ],
+            "styles": ["apps/word/src/styles.scss"],
+            "scripts": [
+
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/word/src/environments/environment.ts",
+                  "with": "apps/word/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "word:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "word:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "word:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/word/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/word/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "word-e2e": {
+      "root": "apps/word-e2e",
+      "sourceRoot": "apps/word-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/word-e2e/cypress.json",
+            "tsConfig": "apps/word-e2e/tsconfig.e2e.json",
+            "devServerTarget": "word:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "word:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/word-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "word"
+}
